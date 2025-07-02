@@ -179,7 +179,6 @@ const Portfolio = () => {
         '📱 Phone: +972 54-3987496',
         '💼 LinkedIn: linkedin.com/in/amro-massalha',
         '🐙 GitHub: github.com/AmroMassalha',
-        '📄 Resume: Type "resume" to download',
         '',
         'Currently: Head of DevOps @ Beamr',
         'Open to: Interesting challenges that break the status quo',
@@ -285,45 +284,9 @@ const Portfolio = () => {
       setTerminalHistory([]);
       return { output: [] };
     },
-    resume: () => {
-      try {
-        // Method 1: Create a link element and trigger download
-        const link = document.createElement('a');
-        link.href = '/portfolio/resume.pdf';
-        link.download = 'Amro_Massalha_Resume.pdf';
-        link.style.display = 'none';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        return {
-          output: [
-            '📄 Downloading resume...',
-            'File: Amro_Massalha_Resume.pdf',
-            '',
-            '✅ Download started!',
-            '',
-            'Alternative methods if download didn\'t start:',
-            '1. Right-click this link and "Save as": https://amromassalha.github.io/portfolio/resume.pdf',
-            '2. Click the Resume button in the header',
-            '3. Open directly: window.open("/portfolio/resume.pdf")'
-          ]
-        };
-      } catch (error) {
-        // Fallback method
-        window.open('/portfolio/resume.pdf', '_blank');
-        
-        return {
-          output: [
-            '📄 Opening resume in new tab...',
-            '',
-            'Direct link: https://amromassalha.github.io/portfolio/resume.pdf',
-            '',
-            'Tip: You can right-click and "Save as" to download'
-          ]
-        };
-      }
-    }
+    resume: () => ({
+      output: ['Opening CV... (In real deployment, this downloads PDF)']
+    })
   };
 
   const jokes: string[] = [
@@ -379,7 +342,11 @@ const Portfolio = () => {
 
     // Focus terminal input
     if (inputRef.current) {
-      setTimeout(() => inputRef.current.focus(), 3000);
+      setTimeout(() => {
+        if (inputRef.current) {
+          inputRef.current.focus();
+        }
+      }, 3000);
     }
   }, []);
 
@@ -457,14 +424,6 @@ const Portfolio = () => {
                   {section}
                 </button>
               ))}
-              <a 
-                href="/portfolio/resume.pdf"
-                download="Amro_Massalha_Resume.pdf"
-                className="flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105"
-              >
-                <ExternalLink className="w-4 h-4" />
-                <span>Resume</span>
-              </a>
               <a 
                 href="https://linkedin.com/in/amro-massalha" 
                 target="_blank" 
@@ -659,7 +618,7 @@ const Portfolio = () => {
                 <p className="text-lg leading-relaxed">
                   My superpower? Making infrastructure decisions that save money AND improve performance. 
                   Like that time I switched us to GPU spot instances and cut compute costs by 70%. Or when 
-                  I convinced skeptical management that Crossplane > Terraform (spoiler: I was right). 
+                  I convinced skeptical management that Crossplane &gt; Terraform (spoiler: I was right). 
                   These days, I apply the same optimization mindset to my avocado farm - turns out trees 
                   scale better than microservices!
                 </p>
