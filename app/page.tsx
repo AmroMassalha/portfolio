@@ -17,103 +17,200 @@ const Portfolio = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const skills = {
-    cloud: ['AWS', 'Azure', 'GCP', 'Terraform', 'CloudFormation'],
-    devops: ['Kubernetes', 'Docker', 'Jenkins', 'GitLab CI', 'ArgoCD'],
-    backend: ['Python', 'Go', 'Node.js', 'PostgreSQL', 'Redis'],
-    monitoring: ['Prometheus', 'Grafana', 'ELK Stack', 'Datadog', 'New Relic']
+    cloud: ['AWS (EC2, Lambda, EKS, S3)', 'Kubernetes', 'Terraform', 'Crossplane', 'AWS Batch'],
+    devops: ['Docker', 'Helm', 'Karpenter', 'KEDA', 'Jenkins', 'GitLab CI', 'ArgoCD'],
+    backend: ['Python (my go-to)', 'Go (when speed matters)', 'Bash (when lazy)', 'KCL', 'Linux'],
+    monitoring: ['Datadog', 'Prometheus/Grafana', 'CloudWatch', 'ELK Stack', 'Slack Bots']
   };
 
   const projects = [
     {
-      title: 'Multi-Region Kubernetes Platform',
-      description: 'Architected resilient K8s infrastructure across 3 AWS regions with automated failover',
-      tech: ['Kubernetes', 'Terraform', 'AWS', 'Prometheus'],
-      metrics: '99.99% uptime, 50% cost reduction',
+      title: 'GPU Spot Instance Revolution',
+      description: 'Broke down monolithic app into microservices on GPU spot instances at Beamr',
+      tech: ['Kubernetes', 'Karpenter', 'KEDA', 'AWS', 'Go'],
+      metrics: '70% compute cost reduction 🎉',
+      icon: <Zap className="w-5 h-5" />
+    },
+    {
+      title: 'SOC2 Certification Speedrun',
+      description: 'Led Beamr through SOC2 certification on first attempt - auditors were impressed!',
+      tech: ['Security Scanning', 'IAM Policies', 'Compliance', 'Documentation'],
+      metrics: 'Passed on first try (rare achievement)',
+      icon: <Shield className="w-5 h-5" />
+    },
+    {
+      title: 'The $10k/Week CI/CD Rescue',
+      description: 'Fixed Minute Media\'s bleeding CI system with smarter build strategies',
+      tech: ['Jenkins', 'GitLab CI', 'Python', 'Build Optimization'],
+      metrics: 'Saved ~$10k weekly on builds',
+      icon: <Database className="w-5 h-5" />
+    },
+    {
+      title: 'Crossplane > Terraform Migration',
+      description: 'Convinced skeptical management to switch IaC tools - best decision ever',
+      tech: ['Crossplane', 'KCL', 'AWS', 'Custom Operators'],
+      metrics: 'Zero-downtime AWS migration',
       icon: <Cloud className="w-5 h-5" />
     },
     {
-      title: 'Zero-Downtime CI/CD Pipeline',
-      description: 'Built GitOps-based deployment system handling 500+ daily deployments',
-      tech: ['ArgoCD', 'GitHub Actions', 'Docker', 'Helm'],
-      metrics: 'Deployment time: 15min → 90sec',
-      icon: <GitBranch className="w-5 h-5" />
+      title: 'The Slack Bot People Love',
+      description: 'Built deployment tracker that makes deployments fun (yes, really)',
+      tech: ['Python', 'Slack API', 'ArgoCD', 'Webhooks'],
+      metrics: 'Team happiness: 📈',
+      icon: <Activity className="w-5 h-5" />
     },
     {
-      title: 'Cloud Cost Optimization Engine',
-      description: 'Developed automated resource optimization saving $2M annually',
-      tech: ['Python', 'AWS Lambda', 'CloudWatch', 'Terraform'],
-      metrics: '40% infrastructure cost reduction',
-      icon: <Database className="w-5 h-5" />
+      title: 'From CloudWatch to Datadog',
+      description: 'Led observability transformation - now we actually know what\'s happening',
+      tech: ['Datadog', 'APM', 'Distributed Tracing', 'Custom Dashboards'],
+      metrics: 'MTTR: 4hr → 15min',
+      icon: <Activity className="w-5 h-5" />
     }
   ];
 
   const certifications = [
-    { name: 'AWS Solutions Architect Pro', year: '2024', verified: true },
-    { name: 'Certified Kubernetes Admin', year: '2023', verified: true },
-    { name: 'HashiCorp Terraform Associate', year: '2023', verified: true },
-    { name: 'Google Cloud Architect', year: '2022', verified: true }
+    { name: 'AWS Cloud Practitioner', year: '2022', verified: true, note: '(the easy one)' },
+    { name: 'Docker + K8s Mastery', year: '2021', verified: true, note: '(actually useful)' },
+    { name: 'ISTQB Level 1 & 2', year: '2019', verified: true, note: '(from my QA days)' },
+    { name: 'B.Sc Industrial Engineering', year: 'Technion', verified: true, note: '(where I learned to optimize everything)' }
   ];
 
-  const commands = {
+  const commands: Record<string, () => { output: string[] }> = {
     help: () => ({
       output: [
         'Available commands:',
-        '  about     - Learn about me',
-        '  skills    - View technical skills',
-        '  projects  - See featured projects',
-        '  contact   - Get contact information',
+        '  about     - My story (QA → DevOps transformation)',
+        '  skills    - Technical arsenal (the fun stuff)',
+        '  projects  - Things I\'ve built/fixed/saved',
+        '  work      - Career journey',
+        '  contact   - Let\'s connect!',
+        '  joke      - DevOps humor',
+        '  coffee    - Brew some virtual coffee ☕',
+        '  ping      - Check system status',
         '  clear     - Clear terminal',
-        '  resume    - Download resume',
+        '  resume    - Download my CV',
         '',
-        'Pro tip: Try clicking the sections above!'
+        'Pro tip: Try "joke" when you need a laugh 😄'
       ]
     }),
     about: () => ({
       output: [
-        'Amro Massalha - Senior DevOps Engineer & Cloud Architect',
+        'Amro Massalha - Head of DevOps @ Beamr',
         '',
-        '🚀 Transforming infrastructure into competitive advantage',
-        '💡 8+ years building resilient, scalable systems',
-        '🌍 Based in Israel, working globally',
+        '🚀 8+ years turning infrastructure chaos into scalable solutions',
+        '📍 Based in Israel, breaking prod... I mean, fixing infrastructure globally',
+        '🔄 Started in QA - now I prevent the bugs before they\'re written',
         '',
-        'Specializing in:',
-        '• Cloud-native architecture & migration',
-        '• Infrastructure as Code & GitOps',
-        '• Container orchestration at scale',
-        '• Site reliability engineering'
+        'My approach: "Start simple, iterate fast, measure everything"',
+        '',
+        'Recent wins:',
+        '• Saved 70% on compute with GPU spot instances (CFO loves me)',
+        '• Migrated to AWS with ZERO downtime (yes, really)',
+        '• Made deployments so smooth, devs actually enjoy them',
+        '• Got SOC2 certified on first try (auditors were shocked)',
+        '',
+        'Languages: English, Arabic, Hebrew (easier than Python 2→3 migration)'
       ]
     }),
     skills: () => ({
       output: [
-        'Technical Skills Matrix:',
+        'Technical Arsenal (aka my daily toolkit):',
         '',
-        '☁️  Cloud Platforms:',
+        '☁️  Cloud & Infrastructure:',
         '   ' + skills.cloud.join(', '),
         '',
-        '🔧 DevOps Tools:',
+        '🔧 DevOps Toolchain:',
         '   ' + skills.devops.join(', '),
         '',
-        '💻 Backend Technologies:',
+        '💻 Languages & Systems:',
         '   ' + skills.backend.join(', '),
         '',
         '📊 Monitoring & Observability:',
-        '   ' + skills.monitoring.join(', ')
+        '   ' + skills.monitoring.join(', '),
+        '',
+        'Special mention: Good networking knowledge (saves you at 3am)'
+      ]
+    }),
+    work: () => ({
+      output: [
+        'Career Journey:',
+        '',
+        '🚀 Head of DevOps @ Beamr (2023 - Present)',
+        '   Running the cloud show. Inherited basic Lambda setup,',
+        '   built full K8s with GPU acceleration. Convinced management',
+        '   Crossplane > Terraform (they were skeptical, now believers)',
+        '',
+        '💰 Senior DevOps @ Minute Media (2021 - 2023)',
+        '   Came to fix bleeding CI system. Saved ~$10k/week.',
+        '   Also taught teams to actually talk to each other.',
+        '',
+        '🔧 Automation Engineer @ BMC Software (2019 - 2021)',
+        '   Enterprise-scale testing. Learned networking the hard way.',
+        '',
+        '🐛 QA Engineer @ Galil Software (2015 - 2019)',
+        '   Foundation years. Where I learned to break things properly.'
       ]
     }),
     projects: () => ({
-      output: projects.map(p => 
-        `📁 ${p.title}\n   ${p.description}\n   Tech: ${p.tech.join(', ')}\n   Impact: ${p.metrics}\n`
-      )
+      output: projects.flatMap(p => [
+        `📁 ${p.title}`,
+        `   ${p.description}`,
+        `   Tech: ${p.tech.join(', ')}`,
+        `   Impact: ${p.metrics}`,
+        ''
+      ])
     }),
     contact: () => ({
       output: [
-        'Let\'s connect!',
+        'Let\'s build something awesome together!',
         '',
-        '📧 Email: amro@example.com',
+        '📧 Email: amr.massalha@gmail.com',
+        '📱 Phone: +972 54-3987496',
         '💼 LinkedIn: linkedin.com/in/amro-massalha',
-        '🐙 GitHub: github.com/amro-massalha',
+        '🐙 GitHub: github.com/AmroMassalha',
         '',
-        'Currently open to Head of DevOps & Cloud Architect roles'
+        'Currently: Head of DevOps @ Beamr',
+        'Open to: Interesting challenges that break the status quo',
+        '',
+        'Final thought: "I solve problems. Sometimes with code,',
+        'sometimes with architecture, sometimes by just talking to people."'
+      ]
+    }),
+    joke: () => ({
+      output: [
+        'Random DevOps wisdom:',
+        '',
+        jokes[Math.floor(Math.random() * jokes.length)],
+        '',
+        'Type "joke" again for more wisdom/trauma 😅'
+      ]
+    }),
+    coffee: () => ({
+      output: [
+        '☕ Brewing virtual coffee...',
+        '',
+        '   ( (',
+        '    ) )',
+        '  ........',
+        '  |      |]',
+        '  \\      /',
+        '   `----\'',
+        '',
+        'Coffee is ready! Productivity +100% 🚀'
+      ]
+    }),
+    ping: () => ({
+      output: [
+        'PING amro-massalha.dev (127.0.0.1): 56 data bytes',
+        '64 bytes from 127.0.0.1: icmp_seq=0 ttl=64 time=0.042 ms',
+        '64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.037 ms',
+        '64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.033 ms',
+        '',
+        '--- amro-massalha.dev ping statistics ---',
+        '3 packets transmitted, 3 packets received, 0.0% packet loss',
+        'round-trip min/avg/max/stddev = 0.033/0.037/0.042/0.004 ms',
+        '',
+        'Status: All systems operational! 🟢'
       ]
     }),
     clear: () => {
@@ -121,19 +218,40 @@ const Portfolio = () => {
       return { output: [] };
     },
     resume: () => ({
-      output: ['Downloading resume... (This would trigger a download in production)']
+      output: ['Opening CV... (In real deployment, this downloads PDF)']
     })
+  };
+
+  const jokes: string[] = [
+    '"It works on my machine" - Ancient DevOps Proverb',
+    'There\'s no place like 127.0.0.1',
+    'To err is human, to really mess up requires Kubernetes',
+    'I don\'t always test my code, but when I do, I do it in production',
+    '99 little bugs in the code, 99 little bugs... Fix one bug, compile again, 117 little bugs in the code',
+    'DevOps: Turning "It\'s not my problem" into "It\'s everyone\'s problem"',
+    'My code doesn\'t have bugs, it just develops random features',
+    'DNS: It\'s always DNS. Even when it\'s not DNS, it\'s DNS.'
+  ];
+
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 6) return "Burning the midnight oil? 🌙";
+    if (hour < 12) return "Good morning! ☕";
+    if (hour < 17) return "Good afternoon! ☀️";
+    if (hour < 22) return "Good evening! 🌆";
+    return "Late night debugging? 🦉";
   };
 
   useEffect(() => {
     const welcomeMessage = [
-      { text: 'Welcome to Amro\'s DevOps Terminal v2.0', delay: 0 },
-      { text: 'Initializing systems...', delay: 500 },
-      { text: '[OK] Cloud infrastructure loaded', delay: 1000 },
-      { text: '[OK] DevOps tools initialized', delay: 1500 },
-      { text: '[OK] Portfolio ready', delay: 2000 },
-      { text: '', delay: 2200 },
-      { text: 'Type "help" for available commands', delay: 2400 }
+      { text: `${getGreeting()} Welcome to Amro's DevOps Terminal v2.0 🚀`, delay: 0 },
+      { text: 'Initializing systems... (unlike my first production deploy)', delay: 500 },
+      { text: '[OK] Kubernetes clusters online', delay: 1000 },
+      { text: '[OK] Coffee levels optimal ☕', delay: 1500 },
+      { text: '[OK] Spot instances running (70% cheaper!)', delay: 2000 },
+      { text: '[OK] All systems green... for now 😅', delay: 2500 },
+      { text: '', delay: 2700 },
+      { text: 'Type "help" for commands or "joke" for DevOps wisdom', delay: 2900 }
     ];
 
     welcomeMessage.forEach(({ text, delay }) => {
@@ -144,7 +262,7 @@ const Portfolio = () => {
 
     // Focus terminal input
     if (inputRef.current) {
-      setTimeout(() => inputRef.current.focus(), 2500);
+      setTimeout(() => inputRef.current.focus(), 3000);
     }
   }, []);
 
@@ -159,7 +277,13 @@ const Portfolio = () => {
           setTerminalHistory(prev => [...prev, { type: 'output', text: line }]);
         });
       } else if (cmd) {
-        setTerminalHistory(prev => [...prev, { type: 'error', text: `Command not found: ${cmd}. Type "help" for commands.` }]);
+        const responses = [
+          `Command not found: ${cmd}. Try "help" for available commands.`,
+          `bash: ${cmd}: command not found. Maybe try sudo? (just kidding)`,
+          `'${cmd}' is not recognized. Did you mean "coffee"? ☕`,
+          `Error: ${cmd} not found. Have you tried turning it off and on again?`
+        ];
+        setTerminalHistory(prev => [...prev, { type: 'error', text: responses[Math.floor(Math.random() * responses.length)] }]);
       }
       
       setCurrentCommand('');
@@ -200,6 +324,7 @@ const Portfolio = () => {
               <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Amro Massalha
               </h1>
+              <span className="text-gray-400 text-sm hidden md:block">Head of DevOps @ Beamr</span>
             </div>
             <nav className="hidden md:flex items-center space-x-6">
               {['terminal', 'projects', 'skills', 'about'].map((section) => (
@@ -280,16 +405,17 @@ const Portfolio = () => {
             {/* Quick Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
               {[
-                { icon: <Cloud />, label: 'Cloud Projects', value: '50+' },
-                { icon: <Server />, label: 'Servers Managed', value: '500+' },
-                { icon: <Shield />, label: 'Uptime', value: '99.99%' },
-                { icon: <Zap />, label: 'Deployments', value: '10K+' }
+                { icon: <Cloud />, label: 'Cloud Costs Saved', value: '70%', detail: 'GPU spot instances FTW' },
+                { icon: <Server />, label: 'Years Breaking/Fixing', value: '8+', detail: 'Started in QA, now we here' },
+                { icon: <Shield />, label: 'SOC2 Attempts', value: '1', detail: 'Passed first try! 🎉' },
+                { icon: <Zap />, label: 'Weekly CI Savings', value: '$10K', detail: 'Minute Media loved this' }
               ].map((stat, i) => (
-                <div key={i} className="bg-black/40 backdrop-blur-sm border border-blue-500/30 rounded-lg p-4 flex items-center space-x-3 transform hover:scale-105 transition-all duration-300">
-                  <div className="text-blue-400">{stat.icon}</div>
+                <div key={i} className="bg-black/40 backdrop-blur-sm border border-blue-500/30 rounded-lg p-4 flex items-center space-x-3 transform hover:scale-105 transition-all duration-300 group">
+                  <div className="text-blue-400 group-hover:text-blue-300 transition-colors">{stat.icon}</div>
                   <div>
                     <p className="text-gray-400 text-sm">{stat.label}</p>
                     <p className="text-2xl font-bold text-white">{stat.value}</p>
+                    <p className="text-xs text-gray-500 mt-1 opacity-0 group-hover:opacity-100 transition-opacity">{stat.detail}</p>
                   </div>
                 </div>
               ))}
@@ -300,9 +426,10 @@ const Portfolio = () => {
         {/* Projects Section */}
         {activeSection === 'projects' && (
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Featured Projects
+            <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Things I've Built, Fixed & Saved 💰
             </h2>
+            <p className="text-center text-gray-400 mb-12">Real impact, real numbers, real stories</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {projects.map((project, i) => (
                 <div 
@@ -335,9 +462,10 @@ const Portfolio = () => {
         {/* Skills Section */}
         {activeSection === 'skills' && (
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-center mb-12 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Technical Arsenal
+            <h2 className="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+              Technical Arsenal 🛠️
             </h2>
+            <p className="text-center text-gray-400 mb-12">The tools I use to turn chaos into scalable infrastructure</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {Object.entries(skills).map(([category, items]) => (
                 <div key={category} className="bg-black/60 backdrop-blur-sm border border-blue-500/30 rounded-lg p-6">
@@ -347,6 +475,10 @@ const Portfolio = () => {
                     {category === 'backend' && <Code className="w-5 h-5 mr-2 text-purple-400" />}
                     {category === 'monitoring' && <Activity className="w-5 h-5 mr-2 text-yellow-400" />}
                     {category.replace(/([A-Z])/g, ' $1').trim()}
+                    {category === 'cloud' && ' ☁️'}
+                    {category === 'devops' && ' 🔧'}
+                    {category === 'backend' && ' 💻'}
+                    {category === 'monitoring' && ' 📊'}
                   </h3>
                   <div className="space-y-3">
                     {items.map((skill, i) => (
@@ -367,15 +499,16 @@ const Portfolio = () => {
 
             {/* Certifications */}
             <div className="mt-12">
-              <h3 className="text-2xl font-semibold text-center mb-8 text-white">Certifications</h3>
+              <h3 className="text-2xl font-semibold text-center mb-8 text-white">Education & Certifications</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {certifications.map((cert, i) => (
-                  <div key={i} className="bg-black/60 backdrop-blur-sm border border-green-500/30 rounded-lg p-4 text-center transform hover:scale-105 transition-all duration-300">
-                    <Award className="w-8 h-8 text-green-400 mx-auto mb-2" />
+                  <div key={i} className="bg-black/60 backdrop-blur-sm border border-green-500/30 rounded-lg p-4 text-center transform hover:scale-105 transition-all duration-300 group">
+                    <Award className="w-8 h-8 text-green-400 mx-auto mb-2 group-hover:text-green-300 transition-colors" />
                     <h4 className="text-white font-medium">{cert.name}</h4>
                     <p className="text-gray-400 text-sm">{cert.year}</p>
+                    <p className="text-green-400 text-xs mt-2">{cert.note}</p>
                     {cert.verified && (
-                      <p className="text-green-400 text-xs mt-2">✓ Verified</p>
+                      <p className="text-green-500 text-xs mt-1">✓ Verified</p>
                     )}
                   </div>
                 ))}
@@ -389,62 +522,89 @@ const Portfolio = () => {
           <div className="max-w-4xl mx-auto">
             <div className="bg-black/60 backdrop-blur-sm border border-blue-500/30 rounded-lg p-8">
               <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Building the Future of Infrastructure
+                From QA to Cloud Infrastructure Hero
               </h2>
               <div className="space-y-6 text-gray-300">
                 <p className="text-lg leading-relaxed">
-                  As a Senior DevOps Engineer and Cloud Architect with 8+ years of experience, I specialize in transforming complex infrastructure challenges into scalable, automated solutions that drive business growth.
+                  Started my career finding bugs, now I prevent them at scale. With 8+ years in the trenches, 
+                  I've transformed from a QA engineer breaking things to a DevOps leader who (mostly) keeps 
+                  things running. Currently heading DevOps at Beamr, where I turned a basic Lambda setup into 
+                  a full-blown Kubernetes empire with GPU acceleration.
                 </p>
                 <p className="text-lg leading-relaxed">
-                  My journey spans from startup agility to enterprise scale, where I've architected systems handling millions of requests, reduced deployment times by 95%, and saved organizations millions through intelligent automation and optimization.
+                  My superpower? Making infrastructure decisions that save money AND improve performance. 
+                  Like that time I switched us to GPU spot instances and cut compute costs by 70%. Or when 
+                  I convinced skeptical management that Crossplane > Terraform (spoiler: I was right).
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-3 flex items-center">
                       <Users className="w-5 h-5 mr-2 text-blue-400" />
-                      Leadership Impact
+                      Leadership Style
                     </h3>
                     <ul className="space-y-2 text-gray-400">
                       <li className="flex items-start">
                         <ChevronRight className="w-4 h-4 mr-2 text-blue-400 mt-1 flex-shrink-0" />
-                        Led teams of 5-15 engineers across multiple time zones
+                        Start simple, iterate fast, measure everything
                       </li>
                       <li className="flex items-start">
                         <ChevronRight className="w-4 h-4 mr-2 text-blue-400 mt-1 flex-shrink-0" />
-                        Mentored 20+ junior engineers to senior positions
+                        Communication fixes more than fancy tools
                       </li>
                       <li className="flex items-start">
                         <ChevronRight className="w-4 h-4 mr-2 text-blue-400 mt-1 flex-shrink-0" />
-                        Established DevOps culture in traditional enterprises
+                        Make deployments so smooth, devs enjoy them
+                      </li>
+                      <li className="flex items-start">
+                        <ChevronRight className="w-4 h-4 mr-2 text-blue-400 mt-1 flex-shrink-0" />
+                        Good networking knowledge saves you at 3am
                       </li>
                     </ul>
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-3 flex items-center">
                       <Zap className="w-5 h-5 mr-2 text-purple-400" />
-                      Technical Excellence
+                      Recent Victories
                     </h3>
                     <ul className="space-y-2 text-gray-400">
                       <li className="flex items-start">
                         <ChevronRight className="w-4 h-4 mr-2 text-purple-400 mt-1 flex-shrink-0" />
-                        Architected multi-region, multi-cloud infrastructures
+                        Zero-downtime AWS migration (yes, really!)
                       </li>
                       <li className="flex items-start">
                         <ChevronRight className="w-4 h-4 mr-2 text-purple-400 mt-1 flex-shrink-0" />
-                        Achieved 99.99% uptime for mission-critical systems
+                        SOC2 certified on first attempt 🎉
                       </li>
                       <li className="flex items-start">
                         <ChevronRight className="w-4 h-4 mr-2 text-purple-400 mt-1 flex-shrink-0" />
-                        Reduced infrastructure costs by 40-60% on average
+                        Saved Minute Media ~$10k/week on CI
+                      </li>
+                      <li className="flex items-start">
+                        <ChevronRight className="w-4 h-4 mr-2 text-purple-400 mt-1 flex-shrink-0" />
+                        Built a Slack bot people actually like
                       </li>
                     </ul>
                   </div>
                 </div>
                 <div className="mt-8 p-6 bg-blue-900/20 rounded-lg border border-blue-500/30">
-                  <p className="text-xl text-center text-white">
-                    "Infrastructure should be invisible when it works, and invaluable when it scales."
+                  <p className="text-xl text-center text-white mb-4">
+                    "I solve problems. Sometimes with code, sometimes with architecture, 
+                    sometimes by just talking to people."
                   </p>
-                  <p className="text-center text-gray-400 mt-2">- My DevOps Philosophy</p>
+                  <p className="text-center text-gray-400 text-sm">
+                    If your infrastructure is held together with duct tape and prayers, let's chat.
+                  </p>
+                </div>
+                <div className="mt-6 flex flex-wrap gap-4 justify-center">
+                  <div className="px-4 py-2 bg-purple-900/30 rounded-full text-purple-300">
+                    🌐 English, Arabic, Hebrew
+                  </div>
+                  <div className="px-4 py-2 bg-blue-900/30 rounded-full text-blue-300">
+                    📍 Israel
+                  </div>
+                  <div className="px-4 py-2 bg-green-900/30 rounded-full text-green-300">
+                    🎓 Technion Graduate
+                  </div>
                 </div>
               </div>
             </div>
@@ -456,15 +616,15 @@ const Portfolio = () => {
       <footer className="relative z-10 mt-20 border-t border-blue-500/30 backdrop-blur-sm bg-black/30">
         <div className="container mx-auto px-6 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <p className="text-gray-400">© 2025 Amro Massalha. Built with passion and code.</p>
+            <p className="text-gray-400">© 2025 Amro Massalha. Built with passion and code (and lots of coffee ☕)</p>
             <div className="flex items-center space-x-6 mt-4 md:mt-0">
-              <a href="mailto:amro@example.com" className="text-gray-400 hover:text-white transition-colors">
+              <a href="mailto:amr.massalha@gmail.com" className="text-gray-400 hover:text-white transition-colors">
                 <Mail className="w-5 h-5" />
               </a>
               <a href="https://linkedin.com/in/amro-massalha" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="https://github.com/amro-massalha" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://github.com/AmroMassalha" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 <Github className="w-5 h-5" />
               </a>
             </div>
