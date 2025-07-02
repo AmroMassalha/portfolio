@@ -3,6 +3,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Terminal, Cloud, GitBranch, Server, Shield, Database, Activity, Award, Mail, Linkedin, Github, ExternalLink, ChevronRight, Code, Users, Zap } from 'lucide-react';
 import DynamicBackground from './components/DynamicBackground';
+import { ThemeSwitcher, themes, type Theme } from './components/ThemeSwitcher';
+import useSound from './hooks/useSound';
+import AIChatAssistant from './components/AIChatAssistant';
+import TestimonialsCarousel from './components/TestimonialsCarousel';
 
 type TerminalLine = {
   type: 'input' | 'output' | 'error';
@@ -10,6 +14,9 @@ type TerminalLine = {
 };
 
 const Portfolio = () => {
+  const { playSound, soundEnabled, setSoundEnabled } = useSound();
+  const [currentTheme, setCurrentTheme] = useState('default');
+  const theme = themes.find(t => t.id === currentTheme) || themes[0];
   const [activeSection, setActiveSection] = useState('terminal');
   const [terminalHistory, setTerminalHistory] = useState<TerminalLine[]>([]);
   const [currentCommand, setCurrentCommand] = useState('');
@@ -388,6 +395,7 @@ const Portfolio = () => {
 
   const handleCommand = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
+      playSound('click');
       const cmd = currentCommand.trim().toLowerCase();
       setTerminalHistory(prev => [...prev, { type: 'input', text: `$ ${currentCommand}` }]);
       
@@ -414,11 +422,13 @@ const Portfolio = () => {
           terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
         }
       }, 10);
+    } else if (e.key && e.key.length === 1) {
+      playSound('type');
     }
   };
 
   return (
-    <div className="min-h-screen relative">
+    <div className={`min-h-screen relative bg-gradient-to-br ${theme.gradient}`}>
       {/* Animated background particles */}
       <DynamicBackground />
 
@@ -437,14 +447,11 @@ const Portfolio = () => {
               {['terminal', 'projects', 'skills', 'about'].map((section) => (
                 <button
                   key={section}
-                  onClick={() => setActiveSection(section)}
-                  className={`capitalize transition-all duration-300 ${
-                    activeSection === section 
-                      ? 'text-blue-400 font-semibold' 
-                      : 'text-gray-300 hover:text-white'
-                  }`}
+                  onClick={() => setSoundEnabled(!soundEnabled)}
+                  className="fixed bottom-4 left-4 p-2 bg-black/80 backdrop-blur-md rounded-full border border-blue-500/30"
                 >
                   {section}
+                  {soundEnabled ? '🔊' : '🔇'}
                 </button>
               ))}
                <a 
@@ -754,6 +761,17 @@ const Portfolio = () => {
           </div>
         </div>
       </footer>
+      
+      {/* Add Testimonials section */}
+      {activeSection === 'testimonials' && (
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-12">What People Say</h2>
+          <TestimonialsCarousel />
+        </div>
+      )}
+
+      <ThemeSwitcher currentTheme={currentTheme} setTheme={setCurrentTheme} />
+      <AIChatAssistant playSound={playSound} />
     </div>
   );
 };

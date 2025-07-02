@@ -168,3 +168,53 @@ body {
     radial-gradient(at 40% 40%, rgba(96, 165, 250, 0.3) 0%, transparent 50%),
     radial-gradient(at 80% 80%, rgba(192, 132, 252, 0.3) 0%, transparent 50%);
 }
+
+/* Custom cursor */
+body {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="%233b82f6" opacity="0.5"/><circle cx="16" cy="16" r="3" fill="%23fff"/></svg>') 16 16, auto;
+}
+
+/* Interactive elements */
+button, a, input, .clickable {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="12" fill="%2360a5fa" opacity="0.8"/><circle cx="16" cy="16" r="4" fill="%23fff"/></svg>') 16 16, pointer;
+}
+
+/* Terminal area */
+.terminal-area {
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><text x="0" y="24" font-family="monospace" font-size="24" fill="%2310b981">></text></svg>') 0 16, text;
+}
+
+/* Matrix mode */
+.matrix-mode {
+  filter: hue-rotate(120deg) contrast(1.2);
+}
+
+.matrix-mode * {
+  color: #00ff00 !important;
+}
+
+/* Slide in animation */
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+/* Float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
