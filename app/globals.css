@@ -24,3 +24,147 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes gradient-shift {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(50px) translateY(-50px);
+  }
+  50% {
+    transform: translateX(-30px) translateY(30px);
+  }
+  75% {
+    transform: translateX(30px) translateY(50px);
+  }
+}
+
+@keyframes gradient-shift-reverse {
+  0%, 100% {
+    transform: translateX(0) translateY(0);
+  }
+  25% {
+    transform: translateX(-50px) translateY(50px);
+  }
+  50% {
+    transform: translateX(30px) translateY(-30px);
+  }
+  75% {
+    transform: translateX(-30px) translateY(-50px);
+  }
+}
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0) translateX(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-20px) translateX(10px) rotate(5deg);
+  }
+  66% {
+    transform: translateY(10px) translateX(-10px) rotate(-5deg);
+  }
+}
+
+@keyframes float-medium {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-30px) translateX(20px);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes slide-down-delay {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Animation classes */
+.animate-gradient-shift {
+  animation: gradient-shift 20s ease-in-out infinite;
+}
+
+.animate-gradient-shift-reverse {
+  animation: gradient-shift-reverse 25s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 15s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float-medium 10s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 30s linear infinite;
+}
+
+.animate-slide-down {
+  animation: slide-down 8s linear infinite;
+}
+
+.animate-slide-down-delay {
+  animation: slide-down 10s linear infinite;
+  animation-delay: 2s;
+}
+
+/* Glow effects */
+.glow-blue {
+  filter: drop-shadow(0 0 20px rgba(96, 165, 250, 0.5));
+}
+
+.glow-purple {
+  filter: drop-shadow(0 0 20px rgba(192, 132, 252, 0.5));
+}
+
+/* Backdrop filters for glassmorphism */
+.backdrop-blur-xl {
+  backdrop-filter: blur(20px);
+}
+
+/* Mesh gradient background */
+.mesh-gradient {
+  background-image: 
+    radial-gradient(at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(at 80% 20%, rgba(255, 130, 200, 0.3) 0%, transparent 50%),
+    radial-gradient(at 40% 40%, rgba(96, 165, 250, 0.3) 0%, transparent 50%),
+    radial-gradient(at 80% 80%, rgba(192, 132, 252, 0.3) 0%, transparent 50%);
+}
