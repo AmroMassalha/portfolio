@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect, useRef } from 'react';
 import { Terminal, Cloud, GitBranch, Server, Shield, Database, Activity, Award, Mail, Linkedin, Github, ExternalLink, ChevronRight, Code, Users, Zap } from 'lucide-react';
 
@@ -102,7 +104,7 @@ const Portfolio = () => {
       output: [
         'Let\'s connect!',
         '',
-        '📧 Email: amr.massalha@gmail.com',
+        '📧 Email: amro@example.com',
         '💼 LinkedIn: linkedin.com/in/amro-massalha',
         '🐙 GitHub: github.com/amro-massalha',
         '',
