@@ -340,12 +340,10 @@ const Portfolio = () => {
       }, delay);
     });
 
-    // Focus terminal input
-    if (inputRef.current) {
+    const input = inputRef.current;
+    if (input) {
       setTimeout(() => {
-        if (inputRef.current) {
-          inputRef.current.focus();
-        }
+        input.focus();
       }, 3000);
     }
   }, []);
