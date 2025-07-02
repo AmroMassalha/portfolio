@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Terminal, Cloud, GitBranch, Server, Shield, Database, Activity, Award, Mail, Linkedin, Github, ExternalLink, ChevronRight, Code, Users, Zap } from 'lucide-react';
-import DynamicBackground from './dynamicbackground';
+import DynamicBackground from './components/DynamicBackground';
 
 type TerminalLine = {
   type: 'input' | 'output' | 'error';
