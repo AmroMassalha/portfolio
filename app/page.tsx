@@ -65,6 +65,13 @@ const Portfolio = () => {
       tech: ['Datadog', 'APM', 'Distributed Tracing', 'Custom Dashboards'],
       metrics: 'MTTR: 4hr → 15min',
       icon: <Activity className="w-5 h-5" />
+    },
+    {
+      title: 'Life/Work Balance Orchestration',
+      description: 'Successfully deployed work-life balance using advanced scheduling algorithms',
+      tech: ['Family First', 'Weekend Farming', 'Avocado Trees', 'Community Time'],
+      metrics: 'Happiness: ∞ | Stress: null',
+      icon: <Users className="w-5 h-5" />
     }
   ];
 
@@ -83,14 +90,16 @@ const Portfolio = () => {
         '  skills    - Technical arsenal (the fun stuff)',
         '  projects  - Things I\'ve built/fixed/saved',
         '  work      - Career journey',
+        '  life      - Beyond the terminal (family & farm) 🌳',
         '  contact   - Let\'s connect!',
         '  joke      - DevOps humor',
         '  coffee    - Brew some virtual coffee ☕',
         '  ping      - Check system status',
+        '  whoami    - Complete system info 😊',
         '  clear     - Clear terminal',
         '  resume    - Download my CV',
         '',
-        'Pro tip: Try "joke" when you need a laugh 😄'
+        'Pro tip: Try "life" to see what I do when not debugging! 🚜'
       ]
     }),
     about: () => ({
@@ -100,6 +109,7 @@ const Portfolio = () => {
         '🚀 8+ years turning infrastructure chaos into scalable solutions',
         '📍 Based in Israel, breaking prod... I mean, fixing infrastructure globally',
         '🔄 Started in QA - now I prevent the bugs before they\'re written',
+        '👨‍👩‍👧‍👧 Powered by family love and homegrown avocados',
         '',
         'My approach: "Start simple, iterate fast, measure everything"',
         '',
@@ -108,6 +118,7 @@ const Portfolio = () => {
         '• Migrated to AWS with ZERO downtime (yes, really)',
         '• Made deployments so smooth, devs actually enjoy them',
         '• Got SOC2 certified on first try (auditors were shocked)',
+        '• Built a life where debugging code and growing avocados coexist',
         '',
         'Languages: English, Arabic, Hebrew (easier than Python 2→3 migration)'
       ]
@@ -176,6 +187,36 @@ const Portfolio = () => {
         'sometimes with architecture, sometimes by just talking to people."'
       ]
     }),
+    life: () => ({
+      output: [
+        '🌟 Life Beyond the Terminal',
+        '',
+        '👨‍👩‍👧‍👧 Family First:',
+        'Married to Noura - fashion designer, salon manager, and the most',
+        'beautiful soul who somehow tolerates my "just one more deployment" promises.',
+        'Blessed with two amazing daughters:',
+        '  • Zeina (7) - Already debugging my excuses better than any QA',
+        '  • Lina (5) - Master of asking "why?" (future engineer confirmed)',
+        '',
+        '🚜 Weekend Warrior:',
+        'When I\'m not orchestrating containers, I\'m orchestrating nature.',
+        'You\'ll find me in my fields, where "deployment" means planting season:',
+        '  • 🥑 Avocado trees (scaling vertically, just like microservices)',
+        '  • 🫒 Olive groves (high availability, zero downtime for centuries)',
+        '  • 🌾 Helping neighbors with wheat harvest (community > competition)',
+        '',
+        '🔧 From DevOps to FarmOps:',
+        'I maintain my tractor like production servers - regular patches included!',
+        'Tools of choice: Tractor, plow, sprayer (the original automation tools)',
+        'Even my car gets CI/CD treatment - continuous inspection, delivery guaranteed!',
+        '',
+        '💚 Life Philosophy:',
+        'Whether it\'s Kubernetes pods or avocado trees, growth requires patience,',
+        'proper maintenance, and occasionally getting your hands dirty.',
+        '',
+        'The best systems - technical or natural - are those we nurture with care.'
+      ]
+    }),
     joke: () => ({
       output: [
         'Random DevOps wisdom:',
@@ -185,6 +226,32 @@ const Portfolio = () => {
         'Type "joke" again for more wisdom/trauma 😅'
       ]
     }),
+    whoami: () => ({
+      output: [
+        'amro@life:~$ whoami --verbose',
+        '',
+        'uid=1985(amro) gid=1000(devops) groups=1000(devops),',
+        '2015(husband),2017(father),2019(farmer),2023(head-of-devops)',
+        '',
+        'Full Name: Amro Massalha',
+        'Roles: Head of DevOps, Husband, Father, Weekend Farmer',
+        'Location: /home/israel',
+        'Uptime: 8+ years in tech, 40+ years in life',
+        'Load Average: Perfectly balanced (work/life/family)',
+        '',
+        'Current Processes:',
+        '  PID 1: Being awesome dad to Zeina & Lina',
+        '  PID 2: Supporting Noura\'s fashion empire',
+        '  PID 3: Scaling Beamr\'s infrastructure',
+        '  PID 4: Growing the best avocados in the region',
+        '  PID 5: Helping neighbors with their harvest',
+        '',
+        'Exit Code: Still running (hopefully for many years) 💚'
+      ]
+    }),
+    family: () => commands.life(),
+    farm: () => commands.life(),
+    personal: () => commands.life(),
     coffee: () => ({
       output: [
         '☕ Brewing virtual coffee...',
@@ -230,15 +297,28 @@ const Portfolio = () => {
     '99 little bugs in the code, 99 little bugs... Fix one bug, compile again, 117 little bugs in the code',
     'DevOps: Turning "It\'s not my problem" into "It\'s everyone\'s problem"',
     'My code doesn\'t have bugs, it just develops random features',
-    'DNS: It\'s always DNS. Even when it\'s not DNS, it\'s DNS.'
+    'DNS: It\'s always DNS. Even when it\'s not DNS, it\'s DNS.',
+    'My avocado trees have better uptime than most production servers',
+    'Teaching my daughters about Git: "No sweetie, you can\'t just force push to daddy\'s branch"',
+    'Wife asked why I name my servers. I said it\'s easier to mourn them when they die.',
+    'I treat my tractor like my servers: regular maintenance, monitoring, and prayer'
   ];
 
   const getGreeting = () => {
     const hour = new Date().getHours();
+    const day = new Date().getDay();
+    
+    // Weekend check (Friday evening to Saturday in Israel)
+    if ((day === 5 && hour >= 18) || day === 6) {
+      return "Shabbat Shalom! 🕯️ Farm mode activated";
+    }
+    
     if (hour < 6) return "Burning the midnight oil? 🌙";
-    if (hour < 12) return "Good morning! ☕";
-    if (hour < 17) return "Good afternoon! ☀️";
-    if (hour < 22) return "Good evening! 🌆";
+    if (hour < 9) return "Good morning! Getting kids ready? ☕";
+    if (hour < 12) return "Good morning! Time to break prod... I mean, build! 🚀";
+    if (hour < 17) return "Good afternoon! Peak productivity hours ⚡";
+    if (hour < 19) return "Good evening! Family time approaching 👨‍👩‍👧‍👧";
+    if (hour < 22) return "Good evening! Kids asleep? Back to coding? 🌆";
     return "Late night debugging? 🦉";
   };
 
@@ -408,7 +488,7 @@ const Portfolio = () => {
                 { icon: <Cloud />, label: 'Cloud Costs Saved', value: '70%', detail: 'GPU spot instances FTW' },
                 { icon: <Server />, label: 'Years Breaking/Fixing', value: '8+', detail: 'Started in QA, now we here' },
                 { icon: <Shield />, label: 'SOC2 Attempts', value: '1', detail: 'Passed first try! 🎉' },
-                { icon: <Zap />, label: 'Weekly CI Savings', value: '$10K', detail: 'Minute Media loved this' }
+                { icon: <Users />, label: 'Life Balance', value: '100%', detail: 'DevOps by day, FarmOps by weekend' }
               ].map((stat, i) => (
                 <div key={i} className="bg-black/40 backdrop-blur-sm border border-blue-500/30 rounded-lg p-4 flex items-center space-x-3 transform hover:scale-105 transition-all duration-300 group">
                   <div className="text-blue-400 group-hover:text-blue-300 transition-colors">{stat.icon}</div>
@@ -534,7 +614,9 @@ const Portfolio = () => {
                 <p className="text-lg leading-relaxed">
                   My superpower? Making infrastructure decisions that save money AND improve performance. 
                   Like that time I switched us to GPU spot instances and cut compute costs by 70%. Or when 
-                  I convinced skeptical management that Crossplane > Terraform (spoiler: I was right).
+                  I convinced skeptical management that Crossplane > Terraform (spoiler: I was right). 
+                  These days, I apply the same optimization mindset to my avocado farm - turns out trees 
+                  scale better than microservices!
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                   <div>
@@ -605,6 +687,12 @@ const Portfolio = () => {
                   <div className="px-4 py-2 bg-green-900/30 rounded-full text-green-300">
                     🎓 Technion Graduate
                   </div>
+                  <div className="px-4 py-2 bg-yellow-900/30 rounded-full text-yellow-300">
+                    👨‍👩‍👧‍👧 Father of 2
+                  </div>
+                  <div className="px-4 py-2 bg-emerald-900/30 rounded-full text-emerald-300">
+                    🚜 Weekend Farmer
+                  </div>
                 </div>
               </div>
             </div>
@@ -616,7 +704,7 @@ const Portfolio = () => {
       <footer className="relative z-10 mt-20 border-t border-blue-500/30 backdrop-blur-sm bg-black/30">
         <div className="container mx-auto px-6 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <p className="text-gray-400">© 2025 Amro Massalha. Built with passion and code (and lots of coffee ☕)</p>
+            <p className="text-gray-400">© 2025 Amro Massalha. Built with passion, code, and love from my family 💚</p>
             <div className="flex items-center space-x-6 mt-4 md:mt-0">
               <a href="mailto:amr.massalha@gmail.com" className="text-gray-400 hover:text-white transition-colors">
                 <Mail className="w-5 h-5" />
