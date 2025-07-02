@@ -289,7 +289,7 @@ const Portfolio = () => {
       try {
         // Method 1: Create a link element and trigger download
         const link = document.createElement('a');
-        link.href = '/public/resume.pdf';
+        link.href = '/portfolio/resume.pdf';
         link.download = 'Amro_Massalha_Resume.pdf';
         link.style.display = 'none';
         document.body.appendChild(link);
@@ -304,20 +304,20 @@ const Portfolio = () => {
             '✅ Download started!',
             '',
             'Alternative methods if download didn\'t start:',
-            '1. Right-click this link and "Save as": https://amromassalha.github.io/public/resume.pdf',
+            '1. Right-click this link and "Save as": https://amromassalha.github.io/portfolio/resume.pdf',
             '2. Click the Resume button in the header',
-            '3. Open directly: window.open("/public/resume.pdf")'
+            '3. Open directly: window.open("/portfolio/resume.pdf")'
           ]
         };
       } catch (error) {
         // Fallback method
-        window.open('/public/resume.pdf', '_blank');
+        window.open('/portfolio/resume.pdf', '_blank');
         
         return {
           output: [
             '📄 Opening resume in new tab...',
             '',
-            'Direct link: https://amromassalha.github.io/public/resume.pdf',
+            'Direct link: https://amromassalha.github.io/portfolio/resume.pdf',
             '',
             'Tip: You can right-click and "Save as" to download'
           ]
@@ -460,7 +460,7 @@ const Portfolio = () => {
                 </button>
               ))}
                <a 
-                href="/public/resume.pdf"
+                href="/portfolio/resume.pdf"
                 download="Amro_Massalha_Resume.pdf"
                 className="flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105"
               >
