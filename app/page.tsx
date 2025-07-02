@@ -3,13 +3,18 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Terminal, Cloud, GitBranch, Server, Shield, Database, Activity, Award, Mail, Linkedin, Github, ExternalLink, ChevronRight, Code, Users, Zap } from 'lucide-react';
 
+type TerminalLine = {
+  type: 'input' | 'output' | 'error';
+  text: string;
+};
+
 const Portfolio = () => {
   const [activeSection, setActiveSection] = useState('terminal');
-  const [terminalHistory, setTerminalHistory] = useState([]);
+  const [terminalHistory, setTerminalHistory] = useState<TerminalLine[]>([]);
   const [currentCommand, setCurrentCommand] = useState('');
   const [typedText, setTypedText] = useState('');
-  const terminalRef = useRef(null);
-  const inputRef = useRef(null);
+  const terminalRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const skills = {
     cloud: ['AWS', 'Azure', 'GCP', 'Terraform', 'CloudFormation'],
@@ -143,14 +148,14 @@ const Portfolio = () => {
     }
   }, []);
 
-  const handleCommand = (e) => {
+  const handleCommand = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       const cmd = currentCommand.trim().toLowerCase();
       setTerminalHistory(prev => [...prev, { type: 'input', text: `$ ${currentCommand}` }]);
       
       if (commands[cmd]) {
         const result = commands[cmd]();
-        result.output.forEach(line => {
+        result.output.forEach((line: string) => {
           setTerminalHistory(prev => [...prev, { type: 'output', text: line }]);
         });
       } else if (cmd) {
