@@ -179,6 +179,7 @@ const Portfolio = () => {
         '📱 Phone: +972 54-3987496',
         '💼 LinkedIn: linkedin.com/in/amro-massalha',
         '🐙 GitHub: github.com/AmroMassalha',
+        '📄 Resume: Type "resume" to download',
         '',
         'Currently: Head of DevOps @ Beamr',
         'Open to: Interesting challenges that break the status quo',
@@ -192,7 +193,7 @@ const Portfolio = () => {
         '🌟 Life Beyond the Terminal',
         '',
         '👨‍👩‍👧‍👧 Family First:',
-        'Married to Noura - fashion designer, salon manager, and the most',
+        'Married to Nora - fashion designer, salon manager, and the most',
         'beautiful soul who somehow tolerates my "just one more deployment" promises.',
         'Blessed with two amazing daughters:',
         '  • Zeina (7) - Already debugging my excuses better than any QA',
@@ -230,18 +231,18 @@ const Portfolio = () => {
       output: [
         'amro@life:~$ whoami --verbose',
         '',
-        'uid=1985(amro) gid=1000(devops) groups=1000(devops),',
-        '2015(husband),2017(father),2019(farmer),2023(head-of-devops)',
+        'uid=1991(amro) gid=1000(devops) groups=1000(devops),',
+        '2017(husband),2018(father),2009(farmer),2023(head-of-devops)',
         '',
         'Full Name: Amro Massalha',
         'Roles: Head of DevOps, Husband, Father, Weekend Farmer',
-        'Location: /home/israel',
-        'Uptime: 8+ years in tech, 40+ years in life',
+        'Location: /home/israel/daburyya',
+        'Uptime: 8+ years in tech, 33+ years in life',
         'Load Average: Perfectly balanced (work/life/family)',
         '',
         'Current Processes:',
         '  PID 1: Being awesome dad to Zeina & Lina',
-        '  PID 2: Supporting Noura\'s fashion empire',
+        '  PID 2: Supporting Nora\'s fashion empire',
         '  PID 3: Scaling Beamr\'s infrastructure',
         '  PID 4: Growing the best avocados in the region',
         '  PID 5: Helping neighbors with their harvest',
@@ -284,9 +285,45 @@ const Portfolio = () => {
       setTerminalHistory([]);
       return { output: [] };
     },
-    resume: () => ({
-      output: ['Opening CV... (In real deployment, this downloads PDF)']
-    })
+    resume: () => {
+      try {
+        // Method 1: Create a link element and trigger download
+        const link = document.createElement('a');
+        link.href = '/public/resume.pdf';
+        link.download = 'Amro_Massalha_Resume.pdf';
+        link.style.display = 'none';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        return {
+          output: [
+            '📄 Downloading resume...',
+            'File: Amro_Massalha_Resume.pdf',
+            '',
+            '✅ Download started!',
+            '',
+            'Alternative methods if download didn\'t start:',
+            '1. Right-click this link and "Save as": https://amromassalha.github.io/public/resume.pdf',
+            '2. Click the Resume button in the header',
+            '3. Open directly: window.open("/public/resume.pdf")'
+          ]
+        };
+      } catch (error) {
+        // Fallback method
+        window.open('/public/resume.pdf', '_blank');
+        
+        return {
+          output: [
+            '📄 Opening resume in new tab...',
+            '',
+            'Direct link: https://amromassalha.github.io/public/resume.pdf',
+            '',
+            'Tip: You can right-click and "Save as" to download'
+          ]
+        };
+      }
+    }
   };
 
   const jokes: string[] = [
@@ -422,6 +459,14 @@ const Portfolio = () => {
                   {section}
                 </button>
               ))}
+               <a 
+                href="/public/resume.pdf"
+                download="Amro_Massalha_Resume.pdf"
+                className="flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-lg transition-all duration-300 transform hover:scale-105"
+              >
+                <ExternalLink className="w-4 h-4" />
+                <span>Resume</span>
+              </a>
               <a 
                 href="https://linkedin.com/in/amro-massalha" 
                 target="_blank" 
