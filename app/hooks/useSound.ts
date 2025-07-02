@@ -1,4 +1,4 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useState } from 'react';
 
 type SoundType = 'click' | 'success' | 'type' | 'error' | 'achievement' | 'whoosh';
 
