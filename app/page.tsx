@@ -4,7 +4,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Terminal, Cloud, GitBranch, Server, Shield, Database, Activity, Award, Mail, Linkedin, Github, ExternalLink, ChevronRight, Code, Users, Zap } from 'lucide-react';
 import DynamicBackground from './components/DynamicBackground';
 import { ThemeSwitcher, themes, type Theme } from './components/ThemeSwitcher';
-import useSound from './hooks/useSound';
 import AIChatAssistant from './components/AIChatAssistant';
 import TestimonialsCarousel from './components/TestimonialsCarousel';
 
@@ -14,7 +13,6 @@ type TerminalLine = {
 };
 
 const Portfolio = () => {
-  const { playSound, soundEnabled, setSoundEnabled } = useSound();
   const [currentTheme, setCurrentTheme] = useState('default');
   const theme = themes.find(t => t.id === currentTheme) || themes[0];
   const [activeSection, setActiveSection] = useState('terminal');
@@ -395,7 +393,6 @@ const Portfolio = () => {
 
   const handleCommand = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      playSound('click');
       const cmd = currentCommand.trim().toLowerCase();
       setTerminalHistory(prev => [...prev, { type: 'input', text: `$ ${currentCommand}` }]);
       
@@ -423,7 +420,6 @@ const Portfolio = () => {
         }
       }, 10);
     } else if (e.key && e.key.length === 1) {
-      playSound('type');
     }
   };
 
@@ -447,11 +443,16 @@ const Portfolio = () => {
               {['terminal', 'projects', 'skills', 'about'].map((section) => (
                 <button
                   key={section}
-                  onClick={() => setSoundEnabled(!soundEnabled)}
-                  className="fixed bottom-4 left-4 p-2 bg-black/80 backdrop-blur-md rounded-full border border-blue-500/30"
+                  onClick={() => {
+                    setActiveSection(section)
+                  }}
+                  className={`capitalize transition-all duration-300 ${
+                    activeSection === section 
+                      ? 'text-blue-400 font-semibold' 
+                      : 'text-gray-300 hover:text-white'
+                  }`}
                 >
                   {section}
-                  {soundEnabled ? '🔊' : '🔇'}
                 </button>
               ))}
                <a 
@@ -771,7 +772,7 @@ const Portfolio = () => {
       )}
 
       <ThemeSwitcher currentTheme={currentTheme} setTheme={setCurrentTheme} />
-      <AIChatAssistant playSound={playSound} />
+      
     </div>
   );
 };
