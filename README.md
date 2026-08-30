@@ -10,7 +10,7 @@
 
 <div align="center">
   <h3>🌟 From QA to Cloud Infrastructure Hero</h3>
-  <p>An interactive terminal-based portfolio showcasing 8+ years of DevOps excellence</p>
+  <p>An interactive terminal-based portfolio showcasing 10+ years of DevOps and platform engineering</p>
   <p>
     <a href="https://amromassalha.github.io/portfolio">👁️ View Live Portfolio</a> •
     <a href="https://linkedin.com/in/amro-massalha">💼 LinkedIn</a> •

@@ -5,7 +5,6 @@ import { Terminal, Cloud, GitBranch, Server, Shield, Database, Activity, Award, 
 import DynamicBackground from './components/DynamicBackground';
 import { ThemeSwitcher, themes, type Theme } from './components/ThemeSwitcher';
 import AIChatAssistant from './components/AIChatAssistant';
-import TestimonialsCarousel from './components/TestimonialsCarousel';
 
 type TerminalLine = {
   type: 'input' | 'output' | 'error';
@@ -23,68 +22,76 @@ const Portfolio = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const skills = {
-    cloud: ['AWS (EC2, Lambda, EKS, S3)', 'Kubernetes', 'Terraform', 'Crossplane', 'AWS Batch'],
-    devops: ['Docker', 'Helm', 'Karpenter', 'KEDA', 'Jenkins', 'GitLab CI', 'ArgoCD'],
+    cloud: ['Kubernetes (AKS, GKE, EKS)', 'Azure', 'GCP', 'AWS', 'Terraform', 'Terragrunt', 'Crossplane'],
+    devops: ['ArgoCD', 'Argo Rollouts', 'Argo Workflows', 'Kargo', 'Helm', 'GitLab CI', 'Karpenter', 'KEDA', 'OLM'],
+    security: ['HashiCorp Vault', 'External Secrets Operator', 'Kong', 'Keycloak', 'Cloudflare WAF', 'mTLS', 'SOC2'],
     backend: ['Python (my go-to)', 'Go (when speed matters)', 'Bash (when lazy)', 'KCL', 'Linux'],
-    monitoring: ['Datadog', 'Prometheus/Grafana', 'CloudWatch', 'ELK Stack', 'Slack Bots']
+    monitoring: ['Datadog', 'Prometheus/Grafana', 'SLO-gated canary analysis', 'Alert-noise reduction']
   };
 
   const projects = [
     {
+      title: 'The Pipeline The Org Runs On',
+      description: 'Designed and built the Terraform GitOps pipeline for the whole DevOps org. Affected-stack change detection, prod/dev runner isolation, Vault AppRole auth. Outlived the repo it was born in.',
+      tech: ['Terragrunt', 'Terraform', 'GitLab CI', 'Vault', 'Azure', 'GCP'],
+      metrics: '56 live stacks, 14 environments, 2 clouds',
+      icon: <GitBranch className="w-5 h-5" />
+    },
+    {
+      title: 'Drift Detection That Stays Quiet',
+      description: 'Daily drift scan across every live stack into one Slack summary, with state-diff suppression so an unchanged set says nothing. A post always means something moved.',
+      tech: ['Bash', 'Terragrunt', 'GitLab CI', 'Slack API'],
+      metrics: 'Silence is the feature',
+      icon: <Activity className="w-5 h-5" />
+    },
+    {
+      title: 'Regulated Fintech Wallet, From Zero',
+      description: 'Built and still own the wallet platform: Kong ingress, Keycloak SSO, JWT signing in an Azure HSM, namespace-scoped secrets, SLO-gated canary releases. Shipped inside bank-partner approval gates.',
+      tech: ['Kubernetes', 'Kong', 'Keycloak', 'Vault', 'Argo Rollouts', 'Azure'],
+      metrics: 'Live in production',
+      icon: <Shield className="w-5 h-5" />
+    },
+    {
       title: 'GPU Spot Instance Revolution',
-      description: 'Broke down monolithic app into microservices on GPU spot instances at Beamr',
+      description: 'Broke down a monolithic app into KEDA-autoscaled microservices on GPU spot instances at Beamr',
       tech: ['Kubernetes', 'Karpenter', 'KEDA', 'AWS', 'Go'],
-      metrics: '70% compute cost reduction 🎉',
+      metrics: '70% compute cost reduction',
       icon: <Zap className="w-5 h-5" />
     },
     {
       title: 'SOC2 Certification Speedrun',
-      description: 'Led Beamr through SOC2 certification on first attempt - auditors were impressed!',
+      description: 'Led Beamr through SOC2 certification on the first attempt, owning the infrastructure security roadmap',
       tech: ['Security Scanning', 'IAM Policies', 'Compliance', 'Documentation'],
-      metrics: 'Passed on first try (rare achievement)',
-      icon: <Shield className="w-5 h-5" />
-    },
-    {
-      title: 'The $10k/Week CI/CD Rescue',
-      description: 'Fixed Minute Media\'s bleeding CI system with smarter build strategies',
-      tech: ['Jenkins', 'GitLab CI', 'Python', 'Build Optimization'],
-      metrics: 'Saved ~$10k weekly on builds',
-      icon: <Database className="w-5 h-5" />
+      metrics: 'Passed on first try',
+      icon: <Award className="w-5 h-5" />
     },
     {
       title: 'Crossplane > Terraform Migration',
-      description: 'Convinced skeptical management to switch IaC tools - best decision ever',
-      tech: ['Crossplane', 'KCL', 'AWS', 'Custom Operators'],
-      metrics: 'Zero-downtime AWS migration',
+      description: 'Built the IaC stack on Crossplane with Go and KCL where Terraform did not fit the use case',
+      tech: ['Crossplane', 'KCL', 'Go', 'AWS', 'Custom Operators'],
+      metrics: 'Zero-downtime migration',
       icon: <Cloud className="w-5 h-5" />
     },
     {
-      title: 'The Slack Bot People Love',
-      description: 'Built deployment tracker that makes deployments fun (yes, really)',
-      tech: ['Python', 'Slack API', 'ArgoCD', 'Webhooks'],
-      metrics: 'Team happiness: 📈',
-      icon: <Activity className="w-5 h-5" />
-    },
-    {
-      title: 'From CloudWatch to Datadog',
-      description: 'Led observability transformation - now we actually know what\'s happening',
-      tech: ['Datadog', 'APM', 'Distributed Tracing', 'Custom Dashboards'],
-      metrics: 'MTTR: 4hr → 15min',
+      title: 'Alerts Worth Reading',
+      description: 'Made platform alerts deployment-immune so a page means an incident, not a deploy',
+      tech: ['Prometheus', 'Grafana', 'Alertmanager'],
+      metrics: '~290 false pages removed in two months',
       icon: <Activity className="w-5 h-5" />
     },
     {
       title: 'Life/Work Balance Orchestration',
       description: 'Successfully deployed work-life balance using advanced scheduling algorithms',
       tech: ['Family First', 'Weekend Farming', 'Avocado Trees', 'Community Time'],
-      metrics: 'Happiness: ∞ | Stress: null',
+      metrics: 'Happiness: \u221E | Stress: null',
       icon: <Users className="w-5 h-5" />
     }
   ];
 
   const certifications = [
-    { name: 'AWS Cloud Practitioner', year: '2022', verified: true, note: '(the easy one)' },
-    { name: 'Docker + K8s Mastery', year: '2021', verified: true, note: '(actually useful)' },
-    { name: 'ISTQB Level 1 & 2', year: '2019', verified: true, note: '(from my QA days)' },
+    { name: 'AWS Cloud Practitioner', year: '2022', verified: true, note: '' },
+    { name: 'Docker + K8s Mastery (Udemy)', year: '2021', verified: true, note: '(a course, not a cert)' },
+    { name: 'ISTQB Level 1 & 2', year: '2016', verified: true, note: '(from my QA days)' },
     { name: 'B.Sc Industrial Engineering', year: 'Technion', verified: true, note: '(where I learned to optimize everything)' }
   ];
 
@@ -110,9 +117,9 @@ const Portfolio = () => {
     }),
     about: () => ({
       output: [
-        'Amro Massalha - Head of DevOps @ Beamr',
+        'Amro Massalha - Senior DevOps / Platform Engineer @ HAAT Delivery',
         '',
-        '🚀 8+ years turning infrastructure chaos into scalable solutions',
+        '🚀 10+ years turning infrastructure chaos into scalable solutions',
         '📍 Based in Israel, breaking prod... I mean, fixing infrastructure globally',
         '🔄 Started in QA - now I prevent the bugs before they\'re written',
         '👨‍👩‍👧‍👧 Powered by family love and homegrown avocados',
@@ -120,10 +127,11 @@ const Portfolio = () => {
         'My approach: "Start simple, iterate fast, measure everything"',
         '',
         'Recent wins:',
+        '• Built the Terraform GitOps pipeline my whole DevOps org runs on',
+        '• Shipped a regulated fintech wallet platform from zero',
         '• Saved 70% on compute with GPU spot instances (CFO loves me)',
-        '• Migrated to AWS with ZERO downtime (yes, really)',
-        '• Made deployments so smooth, devs actually enjoy them',
         '• Got SOC2 certified on first try (auditors were shocked)',
+        '• Deleted ~290 false pages so on-call means something again',
         '• Built a life where debugging code and growing avocados coexist',
         '',
         'Languages: English, Arabic, Hebrew (easier than Python 2→3 migration)'
@@ -152,19 +160,22 @@ const Portfolio = () => {
       output: [
         'Career Journey:',
         '',
-        '🚀 Head of DevOps @ Beamr (2023 - Present)',
-        '   Running the cloud show. Inherited basic Lambda setup,',
-        '   built full K8s with GPU acceleration. Convinced management',
-        '   Crossplane > Terraform (they were skeptical, now believers)',
+        '\ud83d\ude80 Senior DevOps Engineer @ HAAT Delivery (Nov 2025 - Present)',
+        '   GitOps and platform architecture across a multi-cluster K8s estate.',
+        '   Built the Terraform pipeline the org runs on. Built the fintech',
+        '   wallet platform from zero and still own it.',
         '',
-        '💰 Senior DevOps @ Minute Media (2021 - 2023)',
-        '   Came to fix bleeding CI system. Saved ~$10k/week.',
-        '   Also taught teams to actually talk to each other.',
+        '\u2601\ufe0f  DevOps Engineer @ Beamr (Apr 2023 - Nov 2025)',
+        '   Inherited a basic Lambda setup, built full K8s with GPU',
+        '   acceleration. Crossplane over Terraform where it fit better.',
+        '   Led the company through SOC2 on the first attempt.',
         '',
-        '🔧 Automation Engineer @ BMC Software (2019 - 2021)',
-        '   Enterprise-scale testing. Learned networking the hard way.',
+        '\ud83d\udd27 Infrastructure & Automation Engineer @ BMC Software (Mar 2017 - Apr 2023)',
+        '   Infrastructure and IaC for enterprise on-prem and SaaS products.',
+        '   Before that, an object-oriented automation framework for high-scale',
+        '   endurance test environments. Learned networking the hard way.',
         '',
-        '🐛 QA Engineer @ Galil Software (2015 - 2019)',
+        '\ud83d\udc1b QA Engineer @ Galil Software (Oct 2015 - Mar 2017)',
         '   Foundation years. Where I learned to break things properly.'
       ]
     }),
@@ -187,8 +198,8 @@ const Portfolio = () => {
         '🐙 GitHub: github.com/AmroMassalha',
         '📄 Resume: Type "resume" to download',
         '',
-        'Currently: Head of DevOps @ Beamr',
-        'Open to: Interesting challenges that break the status quo',
+        'Currently: Senior DevOps / Platform Engineer @ HAAT Delivery',
+        'Open to: Senior, staff, and lead platform / DevOps roles',
         '',
         'Final thought: "I solve problems. Sometimes with code,',
         'sometimes with architecture, sometimes by just talking to people."'
@@ -238,18 +249,18 @@ const Portfolio = () => {
         'amro@life:~$ whoami --verbose',
         '',
         'uid=1991(amro) gid=1000(devops) groups=1000(devops),',
-        '2017(husband),2018(father),2009(farmer),2023(head-of-devops)',
+        '2017(husband),2018(father),2009(farmer),2015(engineer)',
         '',
         'Full Name: Amro Massalha',
-        'Roles: Head of DevOps, Husband, Father, Weekend Farmer',
+        'Roles: Platform Engineer, Husband, Father, Weekend Farmer',
         'Location: /home/israel/daburyya',
-        'Uptime: 8+ years in tech, 33+ years in life',
+        'Uptime: 10+ years in tech, 33+ years in life',
         'Load Average: Perfectly balanced (work/life/family)',
         '',
         'Current Processes:',
         '  PID 1: Being awesome dad to Zeina & Lina',
         '  PID 2: Supporting Nora\'s fashion empire',
-        '  PID 3: Scaling Beamr\'s infrastructure',
+        '  PID 3: Keeping a fintech wallet platform boring',
         '  PID 4: Growing the best avocados in the region',
         '  PID 5: Helping neighbors with their harvest',
         '',
@@ -437,7 +448,7 @@ const Portfolio = () => {
               <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Amro Massalha
               </h1>
-              <span className="text-gray-400 text-sm hidden md:block">Head of DevOps @ Beamr</span>
+              <span className="text-gray-400 text-sm hidden md:block">Senior DevOps / Platform Engineer</span>
             </div>
             <nav className="hidden md:flex items-center space-x-6">
               {['terminal', 'projects', 'skills', 'about'].map((section) => (
@@ -529,9 +540,9 @@ const Portfolio = () => {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8">
               {[
                 { icon: <Cloud />, label: 'Cloud Costs Saved', value: '70%', detail: 'GPU spot instances FTW' },
-                { icon: <Server />, label: 'Years Breaking/Fixing', value: '8+', detail: 'Started in QA, now we here' },
-                { icon: <Shield />, label: 'SOC2 Attempts', value: '1', detail: 'Passed first try! 🎉' },
-                { icon: <Users />, label: 'Life Balance', value: '100%', detail: 'DevOps by day, FarmOps by weekend' }
+                { icon: <Server />, label: 'Years Breaking/Fixing', value: '10+', detail: 'Started in QA, now we here' },
+                { icon: <GitBranch />, label: 'Stacks On My Pipeline', value: '56', detail: '14 environments, 2 clouds' },
+                { icon: <Shield />, label: 'SOC2 Attempts', value: '1', detail: 'Passed first try! 🎉' }
               ].map((stat, i) => (
                 <div key={i} className="bg-black/40 backdrop-blur-sm border border-blue-500/30 rounded-lg p-4 flex items-center space-x-3 transform hover:scale-105 transition-all duration-300 group">
                   <div className="text-blue-400 group-hover:text-blue-300 transition-colors">{stat.icon}</div>
@@ -645,21 +656,21 @@ const Portfolio = () => {
           <div className="max-w-4xl mx-auto">
             <div className="bg-black/60 backdrop-blur-sm border border-blue-500/30 rounded-lg p-8">
               <h2 className="text-4xl font-bold mb-6 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                From QA to Cloud Infrastructure Hero
+                From QA to Platform Engineering
               </h2>
               <div className="space-y-6 text-gray-300">
                 <p className="text-lg leading-relaxed">
-                  Started my career finding bugs, now I prevent them at scale. With 8+ years in the trenches, 
-                  I've transformed from a QA engineer breaking things to a DevOps leader who (mostly) keeps 
-                  things running. Currently heading DevOps at Beamr, where I turned a basic Lambda setup into 
-                  a full-blown Kubernetes empire with GPU acceleration.
+                  Started my career finding bugs, now I prevent them at scale. With 10+ years in the trenches,
+                  I&apos;ve gone from a QA engineer breaking things to a platform engineer who builds the systems
+                  other engineers ship through. These days that means the Terraform GitOps pipeline my whole
+                  DevOps org runs on, and a regulated fintech wallet platform I built from zero and still own.
                 </p>
                 <p className="text-lg leading-relaxed">
-                  My superpower? Making infrastructure decisions that save money AND improve performance. 
-                  Like that time I switched us to GPU spot instances and cut compute costs by 70%. Or when 
-                  I convinced skeptical management that Crossplane &gt; Terraform (spoiler: I was right). 
-                  These days, I apply the same optimization mindset to my avocado farm - turns out trees 
-                  scale better than microservices!
+                  My superpower? Making infrastructure decisions that save money AND improve performance.
+                  Like switching us to GPU spot instances and cutting compute costs by 70%, or building the
+                  IaC stack on Crossplane where Terraform didn&apos;t fit. And a quieter one: I take alerting
+                  people have learned to ignore and make it worth reading again. I apply the same mindset to
+                  my avocado farm - turns out trees scale better than microservices.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
                   <div>
@@ -694,7 +705,7 @@ const Portfolio = () => {
                     <ul className="space-y-2 text-gray-400">
                       <li className="flex items-start">
                         <ChevronRight className="w-4 h-4 mr-2 text-purple-400 mt-1 flex-shrink-0" />
-                        Zero-downtime AWS migration (yes, really!)
+                        Built the Terraform pipeline my DevOps org runs on
                       </li>
                       <li className="flex items-start">
                         <ChevronRight className="w-4 h-4 mr-2 text-purple-400 mt-1 flex-shrink-0" />
@@ -702,11 +713,11 @@ const Portfolio = () => {
                       </li>
                       <li className="flex items-start">
                         <ChevronRight className="w-4 h-4 mr-2 text-purple-400 mt-1 flex-shrink-0" />
-                        Saved Minute Media ~$10k/week on CI
+                        Cut ~290 false pages in two months
                       </li>
                       <li className="flex items-start">
                         <ChevronRight className="w-4 h-4 mr-2 text-purple-400 mt-1 flex-shrink-0" />
-                        Built a Slack bot people actually like
+                        Shipped a regulated fintech wallet from zero
                       </li>
                     </ul>
                   </div>
@@ -747,7 +758,7 @@ const Portfolio = () => {
       <footer className="relative z-10 mt-20 border-t border-blue-500/30 backdrop-blur-sm bg-black/30">
         <div className="container mx-auto px-6 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
-            <p className="text-gray-400">© 2025 Amro Massalha. Built with passion, code, and love from my family 💚</p>
+            <p className="text-gray-400">© 2026 Amro Massalha. Built with passion, code, and love from my family 💚</p>
             <div className="flex items-center space-x-6 mt-4 md:mt-0">
               <a href="mailto:amr.massalha@gmail.com" className="text-gray-400 hover:text-white transition-colors">
                 <Mail className="w-5 h-5" />
@@ -763,14 +774,6 @@ const Portfolio = () => {
         </div>
       </footer>
       
-      {/* Add Testimonials section */}
-      {activeSection === 'testimonials' && (
-        <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-12">What People Say</h2>
-          <TestimonialsCarousel />
-        </div>
-      )}
-
       <ThemeSwitcher currentTheme={currentTheme} setTheme={setCurrentTheme} />
       
     </div>
