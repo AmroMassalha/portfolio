@@ -36,19 +36,19 @@ const AIChatAssistant: React.FC<AIChatAssistantProps> = ({ playSound }) => {
 
   const responses = {
     experience: [
-      "Amro has 8+ years in DevOps, starting from QA and growing into a Head of DevOps role at Beamr.",
+      "Amro has 10+ years in DevOps and platform engineering, starting from QA.",
       "He's transformed from finding bugs to preventing them at scale!",
-      "His journey: QA Engineer → Automation Engineer → Senior DevOps → Head of DevOps"
+      "His journey: QA Engineer → Automation Engineer → Infrastructure Engineer → Senior DevOps / Platform Engineer"
     ],
     skills: [
       "His top skills include Kubernetes, AWS, Python, and saving companies tons of money!",
-      "He's a master of Terraform, Crossplane, Docker, and all things cloud-native.",
+      "He works daily in Terraform, Terragrunt, ArgoCD, Vault, and Kubernetes across Azure, GCP and AWS.",
       "Fun fact: He convinced management that Crossplane > Terraform and was proven right!"
     ],
     achievements: [
       "Saved 70% on compute costs with GPU spot instances at Beamr",
       "Got SOC2 certified on the first try - auditors were impressed!",
-      "Saved Minute Media ~$10k/week by fixing their CI system"
+      "Built the Terraform GitOps pipeline his whole DevOps org runs on"
     ],
     farming: [
       "Yes, he really does farm avocados and olives on weekends! 🥑🫒",
@@ -66,7 +66,7 @@ const AIChatAssistant: React.FC<AIChatAssistantProps> = ({ playSound }) => {
       "He's open to interesting challenges that break the status quo!"
     ],
     hiring: [
-      "Amro is open to Head of DevOps and Cloud Architect roles",
+      "Amro is open to senior, staff, and lead platform / DevOps roles",
       "He's looking for challenges that make a real impact",
       "Companies that value both technical excellence and work-life balance are his jam"
     ],

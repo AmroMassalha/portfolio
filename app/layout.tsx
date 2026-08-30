@@ -5,9 +5,9 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Amro Massalha | Head of DevOps @ Beamr',
-  description: 'DevOps engineer who saves companies 70% on cloud costs while growing the best avocados in Israel. Kubernetes by day, farming by weekend.',
-  keywords: 'DevOps, Cloud Architect, Kubernetes, AWS, Infrastructure as Code, Beamr, Israel',
+  title: 'Amro Massalha | Senior DevOps / Platform Engineer',
+  description: 'Platform and DevOps engineer. Multi-cloud Kubernetes, Terraform, GitOps. Kubernetes by day, farming by weekend.',
+  keywords: 'DevOps, Platform Engineering, Kubernetes, Terraform, Terragrunt, GitOps, ArgoCD, AWS, Azure, GCP, Infrastructure as Code, Israel',
   authors: [{ name: 'Amro Massalha' }],
   creator: 'Amro Massalha',
   
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://amromassalha.github.io/portfolio/',
     title: 'Amro Massalha - DevOps & Cloud Infrastructure Expert',
-    description: 'From QA to Head of DevOps. Building scalable infrastructure that saves millions. SOC2 certified on first try!',
+    description: 'From QA to platform engineering. Multi-cloud Kubernetes, GitOps pipelines, and infrastructure that stays quiet until it matters.',
     siteName: 'Amro Massalha Portfolio',
     images: [
       {
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   
   twitter: {
     card: 'summary_large_image',
-    title: 'Amro Massalha - Head of DevOps',
-    description: 'Turning infrastructure chaos into scalable solutions. 70% cost savings guaranteed!',
+    title: 'Amro Massalha - Senior DevOps / Platform Engineer',
+    description: 'Multi-cloud Kubernetes, Terraform, GitOps. I build the pipelines other engineers ship through.',
     images: ['/og-image.png'],
   },
   
